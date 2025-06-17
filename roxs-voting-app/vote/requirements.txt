@@ -1,9 +1,0 @@
-Flask==3.0.3
-Redis==5.0.4
-gunicorn==21.2.0
-prometheus-flask-exporter==0.23.0
-prometheus-client==0.20.0
-mock==5.1.0
-flake8==7.0.0
-watchdog==4.0.0
-psycopg2-binary==2.9.9
