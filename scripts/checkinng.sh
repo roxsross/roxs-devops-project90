@@ -52,7 +52,12 @@ create_default_config() {
 
 # Configuración de Slack
 SLACK_ENABLED=true
-SLACK_WEBHOOK_URL="https://hooks.slack.com/services/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"
+# Cargar SLACK_WEBHOOK_URL desde .env si existe
+if [ -f "$BASE_DIR/.env" ]; then
+    SLACK_WEBHOOK_URL=$(grep '^SLACK_WEBHOOK_URL=' "$BASE_DIR/.env" | cut -d'=' -f2-)
+else
+    SLACK_WEBHOOK_URL=
+fi
 SLACK_CHANNEL="#general"
 SLACK_USERNAME="System Monitor"
 SLACK_ICON_EMOJI=":robot_face:"
