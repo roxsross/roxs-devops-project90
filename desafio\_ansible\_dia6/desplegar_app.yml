@@ -1,0 +1,14 @@
+---
+- name: Desafio ansible dia 6 - Despliegue completo de aplicacion
+  hosts: webservers
+  become: yes
+  
+  vars:
+    web_root: "/var/www/html"
+    app_name: "landing-devops"
+    devops_user: "devops"
+    
+  roles:
+    - devops
+    - firewall
+    - nginx

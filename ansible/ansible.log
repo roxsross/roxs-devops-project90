@@ -1,0 +1,263 @@
+2025-06-17 13:25:20,471 p=66044 u=robertorossa n=ansible INFO| localhost | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+2025-06-17 13:30:37,844 p=67364 u=robertorossa n=ansible INFO| {
+    "_meta": {
+        "hostvars": {}
+    },
+    "all": {
+        "children": [
+            "ungrouped"
+        ]
+    }
+}
+2025-06-17 13:31:35,520 p=67698 u=robertorossa n=ansible INFO| {
+    "_meta": {
+        "hostvars": {
+            "app1": {
+                "ansible_host": "192.168.1.30",
+                "ansible_python_interpreter": "/usr/bin/python3",
+                "ansible_ssh_private_key_file": "~/.ssh/id_rsa",
+                "ansible_user": "ubuntu"
+            },
+            "db1": {
+                "ansible_host": "192.168.1.20",
+                "ansible_python_interpreter": "/usr/bin/python3",
+                "ansible_ssh_private_key_file": "~/.ssh/id_rsa",
+                "ansible_user": "ubuntu"
+            },
+            "localhost": {
+                "ansible_connection": "local",
+                "ansible_python_interpreter": "/usr/bin/python3",
+                "ansible_ssh_private_key_file": "~/.ssh/id_rsa"
+            },
+            "web1": {
+                "ansible_host": "192.168.1.10",
+                "ansible_python_interpreter": "/usr/bin/python3",
+                "ansible_ssh_private_key_file": "~/.ssh/id_rsa",
+                "ansible_user": "ubuntu"
+            },
+            "web2": {
+                "ansible_host": "192.168.1.11",
+                "ansible_python_interpreter": "/usr/bin/python3",
+                "ansible_ssh_private_key_file": "~/.ssh/id_rsa",
+                "ansible_user": "ubuntu"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "ungrouped",
+            "local",
+            "production"
+        ]
+    },
+    "appservers": {
+        "hosts": [
+            "app1"
+        ]
+    },
+    "dbservers": {
+        "hosts": [
+            "db1"
+        ]
+    },
+    "local": {
+        "hosts": [
+            "localhost"
+        ]
+    },
+    "production": {
+        "children": [
+            "webservers",
+            "dbservers",
+            "appservers"
+        ]
+    },
+    "webservers": {
+        "hosts": [
+            "web1",
+            "web2"
+        ]
+    }
+}
+2025-06-17 13:31:55,838 p=67893 u=robertorossa n=ansible INFO| localhost | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+2025-06-17 13:32:07,944 p=67893 u=robertorossa n=ansible ERROR|  [ERROR]: User interrupted execution
+
+2025-06-17 13:32:18,498 p=68165 u=robertorossa n=ansible INFO| localhost | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+2025-06-17 13:33:24,817 p=68544 u=robertorossa n=ansible WARNING| [WARNING]: Platform darwin on host localhost is using the discovered Python interpreter at /opt/homebrew/bin/python3.13, but future installation of another
+Python interpreter could change the meaning of that path. See https://docs.ansible.com/ansible-core/2.18/reference_appendices/interpreter_discovery.html for
+more information.
+
+2025-06-17 13:33:24,817 p=68544 u=robertorossa n=ansible INFO| localhost | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/opt/homebrew/bin/python3.13"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+2025-06-17 13:35:57,414 p=69241 u=robertorossa n=ansible INFO| localhost | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+2025-06-17 13:36:11,313 p=69241 u=robertorossa n=ansible ERROR|  [ERROR]: User interrupted execution
+
+2025-06-17 13:36:13,461 p=69450 u=robertorossa n=ansible INFO| localhost | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+2025-06-17 13:36:28,283 p=69622 u=robertorossa n=ansible ERROR|  [ERROR]: User interrupted execution
+
+2025-06-17 13:45:44,757 p=72434 u=robertorossa n=ansible ERROR|  [ERROR]: User interrupted execution
+
+2025-06-17 13:45:53,109 p=72691 u=robertorossa n=ansible INFO| localhost | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+2025-06-17 13:45:58,937 p=72840 u=robertorossa n=ansible INFO| @all:
+  |--@ungrouped:
+  |--@development:
+  |  |--@local:
+  |  |  |--localhost
+  |  |--@virtualbox:
+  |  |  |--vm1
+2025-06-17 13:46:33,945 p=72889 u=robertorossa n=ansible INFO| vm1 | UNREACHABLE! => {
+    "changed": false,
+    "msg": "Data could not be sent to remote host \"192.168.56.101\". Make sure this host can be reached over ssh: ssh: connect to host 192.168.56.101 port 22: Operation timed out\r\n",
+    "unreachable": true
+}
+2025-06-17 13:49:30,649 p=73771 u=robertorossa n=ansible INFO| localhost | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+2025-06-17 13:50:00,538 p=73771 u=robertorossa n=ansible INFO| vm1 | UNREACHABLE! => {
+    "changed": false,
+    "msg": "Data could not be sent to remote host \"192.168.56.101\". Make sure this host can be reached over ssh: ssh: connect to host 192.168.56.101 port 22: Operation timed out\r\n",
+    "unreachable": true
+}
+2025-06-17 13:52:12,381 p=74537 u=robertorossa n=ansible INFO| localhost | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+2025-06-17 13:52:12,626 p=74537 u=robertorossa n=ansible INFO| vm1 | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+2025-06-17 13:52:24,605 p=74733 u=robertorossa n=ansible INFO| {
+    "_meta": {
+        "hostvars": {
+            "localhost": {
+                "ansible_connection": "local",
+                "ansible_python_interpreter": "/usr/bin/python3"
+            },
+            "vm1": {
+                "ansible_host": "192.168.33.10",
+                "ansible_python_interpreter": "/usr/bin/python3",
+                "ansible_ssh_common_args": "-o StrictHostKeyChecking=no",
+                "ansible_ssh_private_key_file": "~/.ssh/id_rsa",
+                "ansible_user": "vagrant"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "ungrouped",
+            "development"
+        ]
+    },
+    "development": {
+        "children": [
+            "local",
+            "virtualbox"
+        ]
+    },
+    "local": {
+        "hosts": [
+            "localhost"
+        ]
+    },
+    "virtualbox": {
+        "hosts": [
+            "vm1"
+        ]
+    }
+}
+2025-06-17 13:52:32,346 p=74893 u=robertorossa n=ansible INFO| ansible [core 2.18.6]
+  config file = /Users/robertorossa/Desktop/Desarrollo/BootCampDevOpsRox/rcrossa-devops-project90/ansible/ansible.cfg
+  configured module search path = ['/Users/robertorossa/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /Users/robertorossa/.local/pipx/venvs/ansible/lib/python3.13/site-packages/ansible
+  ansible collection location = /Users/robertorossa/.ansible/collections:/usr/share/ansible/collections
+  executable location = /Users/robertorossa/.local/bin/ansible
+  python version = 3.13.4 (main, Jun  3 2025, 15:34:24) [Clang 17.0.0 (clang-1700.0.13.3)] (/Users/robertorossa/.local/pipx/venvs/ansible/bin/python)
+  jinja version = 3.1.6
+  libyaml = True
+2025-06-17 13:52:32,346 p=74893 u=robertorossa n=ansible INFO| Using /Users/robertorossa/Desktop/Desarrollo/BootCampDevOpsRox/rcrossa-devops-project90/ansible/ansible.cfg as config file
+2025-06-17 13:52:32,381 p=74893 u=robertorossa n=ansible INFO| host_list declined parsing /Users/robertorossa/Desktop/Desarrollo/BootCampDevOpsRox/rcrossa-devops-project90/ansible/inventory/hosts as it did not pass its verify_file() method
+2025-06-17 13:52:32,381 p=74893 u=robertorossa n=ansible INFO| script declined parsing /Users/robertorossa/Desktop/Desarrollo/BootCampDevOpsRox/rcrossa-devops-project90/ansible/inventory/hosts as it did not pass its verify_file() method
+2025-06-17 13:52:32,381 p=74893 u=robertorossa n=ansible INFO| auto declined parsing /Users/robertorossa/Desktop/Desarrollo/BootCampDevOpsRox/rcrossa-devops-project90/ansible/inventory/hosts as it did not pass its verify_file() method
+2025-06-17 13:52:32,382 p=74893 u=robertorossa n=ansible INFO| Parsed /Users/robertorossa/Desktop/Desarrollo/BootCampDevOpsRox/rcrossa-devops-project90/ansible/inventory/hosts inventory source with ini plugin
+2025-06-17 13:52:32,402 p=74893 u=robertorossa n=ansible INFO| Skipping callback 'default', as we already have a stdout callback.
+2025-06-17 13:52:32,402 p=74893 u=robertorossa n=ansible INFO| Skipping callback 'minimal', as we already have a stdout callback.
+2025-06-17 13:52:32,402 p=74893 u=robertorossa n=ansible INFO| Skipping callback 'oneline', as we already have a stdout callback.
+2025-06-17 13:52:32,412 p=74893 u=robertorossa n=ansible INFO| <localhost> ESTABLISH LOCAL CONNECTION FOR USER: robertorossa
+2025-06-17 13:52:32,413 p=74893 u=robertorossa n=ansible INFO| <localhost> EXEC /bin/sh -c 'echo ~robertorossa && sleep 0'
+2025-06-17 13:52:32,423 p=74893 u=robertorossa n=ansible INFO| <localhost> EXEC /bin/sh -c '( umask 77 && mkdir -p "` echo /Users/robertorossa/.ansible/tmp `"&& mkdir "` echo /Users/robertorossa/.ansible/tmp/ansible-tmp-1750179152.423294-74894-38245705721728 `" && echo ansible-tmp-1750179152.423294-74894-38245705721728="` echo /Users/robertorossa/.ansible/tmp/ansible-tmp-1750179152.423294-74894-38245705721728 `" ) && sleep 0'
+2025-06-17 13:52:32,450 p=74893 u=robertorossa n=ansible INFO| Using module file /Users/robertorossa/.local/pipx/venvs/ansible/lib/python3.13/site-packages/ansible/modules/ping.py
+2025-06-17 13:52:32,450 p=74893 u=robertorossa n=ansible INFO| Using module file /Users/robertorossa/.local/pipx/venvs/ansible/lib/python3.13/site-packages/ansible/modules/ping.py
+2025-06-17 13:52:32,450 p=74893 u=robertorossa n=ansible INFO| Pipelining is enabled.
+2025-06-17 13:52:32,450 p=74893 u=robertorossa n=ansible INFO| <192.168.33.10> ESTABLISH SSH CONNECTION FOR USER: vagrant
+2025-06-17 13:52:32,450 p=74893 u=robertorossa n=ansible INFO| <localhost> PUT /Users/robertorossa/.ansible/tmp/ansible-local-74893ua7qhvxo/tmp24qjuyp0 TO /Users/robertorossa/.ansible/tmp/ansible-tmp-1750179152.423294-74894-38245705721728/AnsiballZ_ping.py
+2025-06-17 13:52:32,450 p=74893 u=robertorossa n=ansible INFO| <192.168.33.10> SSH: EXEC ssh -vvv -o ControlMaster=auto -o ControlPersist=60s -o StrictHostKeyChecking=no -o 'IdentityFile="/Users/robertorossa/.ssh/id_rsa"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="vagrant"' -o ConnectTimeout=30 -o StrictHostKeyChecking=no -o 'ControlPath="/Users/robertorossa/.ansible/cp/d986014952"' 192.168.33.10 '/bin/sh -c '"'"'/usr/bin/python3 && sleep 0'"'"''
+2025-06-17 13:52:32,450 p=74893 u=robertorossa n=ansible INFO| <localhost> EXEC /bin/sh -c 'chmod u+rwx /Users/robertorossa/.ansible/tmp/ansible-tmp-1750179152.423294-74894-38245705721728/ /Users/robertorossa/.ansible/tmp/ansible-tmp-1750179152.423294-74894-38245705721728/AnsiballZ_ping.py && sleep 0'
+2025-06-17 13:52:32,460 p=74893 u=robertorossa n=ansible INFO| <localhost> EXEC /bin/sh -c '/usr/bin/python3 /Users/robertorossa/.ansible/tmp/ansible-tmp-1750179152.423294-74894-38245705721728/AnsiballZ_ping.py && sleep 0'
+2025-06-17 13:52:32,529 p=74893 u=robertorossa n=ansible INFO| <192.168.33.10> (0, b'\n{"ping": "pong", "invocation": {"module_args": {"data": "pong"}}}\n', b"OpenSSH_9.9p2, LibreSSL 3.3.6\r\ndebug1: Reading configuration data /Users/robertorossa/.ssh/config\r\ndebug1: Reading configuration data /etc/ssh/ssh_config\r\ndebug1: /etc/ssh/ssh_config line 21: include /etc/ssh/ssh_config.d/* matched no files\r\ndebug1: /etc/ssh/ssh_config line 54: Applying options for *\r\ndebug2: resolve_canonicalize: hostname 192.168.33.10 is address\r\ndebug3: expanded UserKnownHostsFile '~/.ssh/known_hosts' -> '/Users/robertorossa/.ssh/known_hosts'\r\ndebug3: expanded UserKnownHostsFile '~/.ssh/known_hosts2' -> '/Users/robertorossa/.ssh/known_hosts2'\r\ndebug1: Authenticator provider $SSH_SK_PROVIDER did not resolve; disabling\r\ndebug1: auto-mux: Trying existing master at '/Users/robertorossa/.ansible/cp/d986014952'\r\ndebug2: fd 3 setting O_NONBLOCK\r\ndebug2: mux_client_hello_exchange: master version 4\r\ndebug3: mux_client_forwards: request forwardings: 0 local, 0 remote\r\ndebug3: mux_client_request_session: entering\r\ndebug3: mux_client_request_alive: entering\r\ndebug3: mux_client_request_alive: done pid = 74558\r\ndebug3: mux_client_request_session: session request sent\r\ndebug1: mux_client_request_session: master session id: 2\r\ndebug3: mux_client_read_packet_timeout: read header failed: Broken pipe\r\ndebug2: Received exit status from master 0\r\n")
+2025-06-17 13:52:32,532 p=74893 u=robertorossa n=ansible INFO| vm1 | SUCCESS => {
+    "changed": false,
+    "invocation": {
+        "module_args": {
+            "data": "pong"
+        }
+    },
+    "ping": "pong"
+}
+2025-06-17 13:52:32,558 p=74893 u=robertorossa n=ansible INFO| <localhost> EXEC /bin/sh -c 'rm -f -r /Users/robertorossa/.ansible/tmp/ansible-tmp-1750179152.423294-74894-38245705721728/ > /dev/null 2>&1 && sleep 0'
+2025-06-17 13:52:32,567 p=74893 u=robertorossa n=ansible INFO| localhost | SUCCESS => {
+    "changed": false,
+    "invocation": {
+        "module_args": {
+            "data": "pong"
+        }
+    },
+    "ping": "pong"
+}
+2025-06-17 13:52:37,992 p=75059 u=robertorossa n=ansible INFO| localhost | SUCCESS => {
+    "changed": false,
+    "ping": "pong"
+}
+2025-06-17 13:54:11,161 p=75776 u=robertorossa n=ansible INFO| PLAY [Configurar hosts de desarrollo] *********************************************************************************************************
+2025-06-17 13:54:11,165 p=75776 u=robertorossa n=ansible INFO| TASK [Gathering Facts] ************************************************************************************************************************
+2025-06-17 13:54:11,595 p=75776 u=robertorossa n=ansible INFO| ok: [localhost]
+2025-06-17 13:54:11,990 p=75776 u=robertorossa n=ansible INFO| ok: [vm1]
+2025-06-17 13:54:11,993 p=75776 u=robertorossa n=ansible INFO| TASK [Mostrar información del sistema] ********************************************************************************************************
+2025-06-17 13:54:12,009 p=75776 u=robertorossa n=ansible INFO| ok: [localhost] => {
+    "msg": "Host: localhost\nSistema: Darwin\nDistribución: MacOSX\nIP: 10.19.8.125\n"
+}
+2025-06-17 13:54:12,010 p=75776 u=robertorossa n=ansible INFO| ok: [vm1] => {
+    "msg": "Host: vm1\nSistema: Linux\nDistribución: Ubuntu\nIP: 10.0.2.15\n"
+}
+2025-06-17 13:54:12,012 p=75776 u=robertorossa n=ansible INFO| TASK [Crear directorio de prueba] *************************************************************************************************************
+2025-06-17 13:54:12,145 p=75776 u=robertorossa n=ansible INFO| changed: [vm1]
+2025-06-17 13:54:12,166 p=75776 u=robertorossa n=ansible INFO| changed: [localhost]
+2025-06-17 13:54:12,168 p=75776 u=robertorossa n=ansible INFO| TASK [Crear archivo de prueba] ****************************************************************************************************************
+2025-06-17 13:54:12,456 p=75776 u=robertorossa n=ansible INFO| changed: [vm1]
+2025-06-17 13:54:12,474 p=75776 u=robertorossa n=ansible INFO| changed: [localhost]
+2025-06-17 13:54:12,474 p=75776 u=robertorossa n=ansible INFO| PLAY RECAP ************************************************************************************************************************************
+2025-06-17 13:54:12,475 p=75776 u=robertorossa n=ansible INFO| localhost                  : ok=4    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+2025-06-17 13:54:12,475 p=75776 u=robertorossa n=ansible INFO| vm1                        : ok=4    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   

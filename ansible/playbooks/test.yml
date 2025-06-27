@@ -1,0 +1,28 @@
+---
+- name: Configurar hosts de desarrollo
+  hosts: all
+  gather_facts: yes
+  
+  tasks:
+    - name: Mostrar información del sistema
+      debug:
+        msg: |
+          Host: {{ inventory_hostname }}
+          Sistema: {{ ansible_system }}
+          Distribución: {{ ansible_distribution | default('N/A') }}
+          IP: {{ ansible_default_ipv4.address | default('N/A') }}
+
+    - name: Crear directorio de prueba
+      file:
+        path: /tmp/ansible-test
+        state: directory
+        mode: '0755'
+
+    - name: Crear archivo de prueba
+      copy:
+        content: |
+          Ansible test file
+          Host: {{ inventory_hostname }}
+          Fecha: {{ ansible_date_time.date }}
+        dest: /tmp/ansible-test/info.txt
+        mode: '0644'

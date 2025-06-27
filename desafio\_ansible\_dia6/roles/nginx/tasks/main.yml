@@ -1,0 +1,35 @@
+---
+- name: Instalar Nginx
+  package:
+    name: nginx
+    state: present
+
+- name: Crear directorio para la aplicación web
+  file:
+    path: "{{ web_root }}"
+    state: directory
+    owner: www-data
+    group: www-data
+    mode: '0755'
+
+- name: Crear landing page personalizada
+  template:
+    src: index.html.j2
+    dest: "{{ web_root }}/index.html"
+    owner: www-data
+    group: www-data
+    mode: '0644'
+  notify: restart nginx
+
+- name: Configurar sitio por defecto de Nginx
+  template:
+    src: default.j2
+    dest: /etc/nginx/sites-available/default
+    backup: yes
+  notify: restart nginx
+
+- name: Iniciar y habilitar Nginx
+  service:
+    name: nginx
+    state: started
+    enabled: yes

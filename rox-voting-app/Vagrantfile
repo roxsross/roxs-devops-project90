@@ -1,0 +1,29 @@
+
+
+Vagrant.configure("2") do |config|
+    config.vm.box = "bento/ubuntu-24.04"
+    config.vm.network "private_network", ip: "192.168.33.10"
+    config.vm.network "forwarded_port", guest: 80, host: 8080
+    config.vm.provision "shell", inline: <<-SHELL
+        # Actualizar sistema
+        apt update && apt upgrade -y
+        # Instalar utilidades básicas
+        apt install -y curl wget git vim tree htop net-tools software-properties-common apt-transport-https ca-certificates gnupg lsb-release nodejs npm postgresql python3 python3-pip nginx redis-server
+        # Instalar Node.js y npm
+
+        python3 -m pip install flask flask-sqlalchemy flask-migrate psycopg2-binary
+
+        # verificar instalaciones
+        echo "===Verificando instalaciones==="
+        python3 --version
+        pip3 --version
+        node --version
+        npm --version
+        psql --version
+        postgresql --version
+        redis-cli --version
+        flask --version
+        echo "===Instalaciones verificadas==="
+    SHELL
+end
+         

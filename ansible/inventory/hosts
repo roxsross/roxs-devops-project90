@@ -1,0 +1,21 @@
+# Servidor local para pruebas
+[local]
+localhost ansible_connection=local
+
+
+# Máquina virtual en VirtualBox
+[virtualbox]
+vm1 ansible_host=192.168.33.10 ansible_user=vagrant ansible_ssh_private_key_file=~/.ssh/id_rsa
+
+# Grupo de desarrollo (incluye local y VM)
+[development:children]
+local
+virtualbox
+
+# Variables globales
+[all:vars]
+ansible_python_interpreter=/usr/bin/python3
+
+# Variables específicas para VirtualBox
+[virtualbox:vars]
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'

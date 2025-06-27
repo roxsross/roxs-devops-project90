@@ -1,0 +1,28 @@
+---
+- name: Crear grupo devops
+  group:
+    name: devops
+    state: present
+
+- name: Crear usuario devops
+  user:
+    name: devops
+    group: devops
+    groups: sudo
+    shell: /bin/bash
+    create_home: yes
+    state: present
+
+- name: Configurar sudo sin contraseña para usuario devops
+  lineinfile:
+    path: /etc/sudoers
+    line: 'devops ALL=(ALL) NOPASSWD:ALL'
+    validate: 'visudo -cf %s'
+
+- name: Crear directorio .ssh para usuario devops
+  file:
+    path: /home/devops/.ssh
+    state: directory
+    owner: devops
+    group: devops
+    mode: '0700'

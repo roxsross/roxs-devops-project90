@@ -16,79 +16,87 @@ Vagrant.configure("2") do |config|
   # Configuración de red (accesible via IP)
   config.vm.network "private_network", ip: "192.168.33.10"
 
-   # Provisionamiento con Shell
+  # Configurar carpetas compartidas
+  config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
+  config.vm.synced_folder "./scripts", "/home/vagrant/scripts", create: true, type: "virtualbox"
+
+  # Configuración de VirtualBox
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "2048"
+    vb.cpus = 2
+    vb.name = "devops-bootcamp-vm"
+  end
+
+  # Provisionamiento mejorado
   config.vm.provision "shell", inline: <<-SHELL
-  # Instalar Docker
-  apt update
-  apt install -y docker.io
-  systemctl enable --now docker
-  
-  # Instalar kubectl
-  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/armd64/kubectl"
-  install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-  
-  # Verificar
-  docker --version && kubectl version --client
+    # Actualizar sistema
+    apt update && apt upgrade -y
+    
+    # Instalar utilidades básicas
+    apt install -y curl wget git vim tree htop net-tools software-properties-common apt-transport-https ca-certificates gnupg lsb-release
+    
+    # Instalar Docker (método oficial)
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+    apt update
+    apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+    
+    # Configurar Docker
+    systemctl enable --now docker
+    usermod -aG docker vagrant
+    
+    # Instalar kubectl (método oficial)
+    curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+    install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+    rm kubectl
+    
+    # Instalar Minikube
+    curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+    install minikube-linux-amd64 /usr/local/bin/minikube
+    rm minikube-linux-amd64
+    
+    # Instalar Helm
+    curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | tee /usr/share/keyrings/helm.gpg > /dev/null
+    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | tee /etc/apt/sources.list.d/helm-stable-debian.list
+    apt update
+    apt install -y helm
+    
+    # Instalar Terraform
+    wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+    echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/hashicorp.list
+    apt update && apt install -y terraform
+    
+    # Instalar Go
+    wget https://go.dev/dl/go1.21.5.linux-amd64.tar.gz
+    tar -C /usr/local -xzf go1.21.5.linux-amd64.tar.gz
+    rm go1.21.5.linux-amd64.tar.gz
+    
+    # Configurar PATH para Go
+    echo 'export PATH=$PATH:/usr/local/go/bin' >> /home/vagrant/.bashrc
+    echo 'export PATH=$PATH:/home/vagrant/go/bin' >> /home/vagrant/.bashrc
+    
+    # Instalar Python y pip
+    apt install -y python3 python3-pip python3-venv
+    
+    # Instalar Ansible
+    python3 -m pip install ansible
+    
+    # Crear estructura de directorios
+    mkdir -p /home/vagrant/{projects,scripts,configs}
+    chown -R vagrant:vagrant /home/vagrant/{projects,scripts,configs}
+    
+    # Verificar instalaciones
+    echo "=== Verificación de instalaciones ==="
+    docker --version
+    kubectl version --client
+    minikube version
+    helm version
+    terraform version
+    go version
+    python3 --version
+    ansible --version
+    
+    echo "=== Setup completado ==="
+    echo "Reinicia la sesión para aplicar cambios de grupos: vagrant reload"
   SHELL
-
-  # Disable automatic box update checking. If you disable this, then
-  # boxes will only be checked for updates when the user runs
-  # `vagrant box outdated`. This is not recommended.
-  # config.vm.box_check_update = false
-
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine. In the example below,
-  # accessing "localhost:8080" will access port 80 on the guest machine.
-  # NOTE: This will enable public access to the opened port
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
-
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine and only allow access
-  # via 127.0.0.1 to disable public access
-  # config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
-
-  # Create a private network, which allows host-only access to the machine
-  # using a specific IP.
-  # config.vm.network "private_network", ip: "192.168.33.10"
-
-  # Create a public network, which generally matched to bridged network.
-  # Bridged networks make the machine appear as another physical device on
-  # your network.
-  # config.vm.network "public_network"
-
-  # Share an additional folder to the guest VM. The first argument is
-  # the path on the host to the actual folder. The second argument is
-  # the path on the guest to mount the folder. And the optional third
-  # argument is a set of non-required options.
-  # config.vm.synced_folder "../data", "/vagrant_data"
-
-  # Disable the default share of the current code directory. Doing this
-  # provides improved isolation between the vagrant box and your host
-  # by making sure your Vagrantfile isn't accessible to the vagrant box.
-  # If you use this you may want to enable additional shared subfolders as
-  # shown above.
-  # config.vm.synced_folder ".", "/vagrant", disabled: true
-
-  # Provider-specific configuration so you can fine-tune various
-  # backing providers for Vagrant. These expose provider-specific options.
-  # Example for VirtualBox:
-  #
-  # config.vm.provider "virtualbox" do |vb|
-  #   # Display the VirtualBox GUI when booting the machine
-  #   vb.gui = true
-  #
-  #   # Customize the amount of memory on the VM:
-  #   vb.memory = "1024"
-  # end
-  #
-  # View the documentation for the provider you are using for more
-  # information on available options.
-
-  # Enable provisioning with a shell script. Additional provisioners such as
-  # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
-  # documentation for more information about their specific syntax and use.
-  # config.vm.provision "shell", inline: <<-SHELL
-  #   apt-get update
-  #   apt-get install -y apache2
-  # SHELL
 end

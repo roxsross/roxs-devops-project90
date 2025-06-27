@@ -1,0 +1,14 @@
+---
+- name: Desafio dia 7 - Despliegue completo de aplicacion votame a rox
+  hosts: webservers
+  become: yes
+  
+  vars:
+    web_root: "/var/www/html"
+    app_name: "rox-voting-app"
+    devops_user: "devops"
+    
+  roles:
+    - devops
+    - firewall
+    - nginx

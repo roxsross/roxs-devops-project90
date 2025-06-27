@@ -1,0 +1,74 @@
+---
+- name: Instalar ufw
+  package:
+    name: ufw
+    state: present
+
+- name: Configurar política por defecto para incoming
+  ufw:
+    policy: deny
+    direction: incoming
+
+- name: Configurar política por defecto para outgoing
+  ufw:
+    policy: allow
+    direction: outgoing
+
+- name: Permitir SSH (puerto 22)
+  ufw:
+    rule: allow
+    port: "22"
+    proto: tcp
+
+- name: Permitir HTTP (puerto 80)
+  ufw:
+    rule: allow
+    port: "80"
+    proto: tcp
+
+- name: Permitir HTTPS (puerto 443)
+  ufw:
+    rule: allow
+    port: "443"
+    proto: tcp
+
+- name: Habilitar firewall
+  ufw:
+    state: enabled
+
+- name: Instalar ufw
+  package:
+    name: ufw
+    state: present
+
+- name: Configurar política por defecto para incoming
+  ufw:
+    policy: deny
+    direction: incoming
+
+- name: Configurar política por defecto para outgoing
+  ufw:
+    policy: allow
+    direction: outgoing
+
+- name: Permitir SSH (puerto 22)
+  ufw:
+    rule: allow
+    port: "22"
+    proto: tcp
+
+- name: Permitir HTTP (puerto 80)
+  ufw:
+    rule: allow
+    port: "80"
+    proto: tcp
+
+- name: Permitir HTTPS (puerto 443)
+  ufw:
+    rule: allow
+    port: "443"
+    proto: tcp
+
+- name: Habilitar firewall
+  ufw:
+    state: enabled

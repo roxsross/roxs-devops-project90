@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Landing - {{ inventory_hostname }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin: 0; padding: 0; }
+        .container { max-width: 800px; margin: 50px auto; padding: 40px; background: white; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
+        h1 { color: #333; text-align: center; margin-bottom: 30px; }
+        .info { background: #f8f9fa; padding: 20px; border-left: 4px solid #007bff; margin: 20px 0; }
+        .status { display: flex; justify-content: space-around; margin: 30px 0; }
+        .status-item { text-align: center; padding: 20px; background: #e9ecef; border-radius: 8px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 DevOps Landing Page</h1>
+        <div class="info">
+            <h3>Información del Servidor</h3>
+            <p><strong>Hostname:</strong> {{ inventory_hostname }}</p>
+            <p><strong>Sistema Operativo:</strong> {{ ansible_distribution }} {{ ansible_distribution_version }}</p>
+            <p><strong>Arquitectura:</strong> {{ ansible_architecture }}</p>
+            <p><strong>Fecha de despliegue:</strong> {{ ansible_date_time.date }}</p>
+        </div>
+        
+        <div class="status">
+            <div class="status-item">
+                <h4>✅ Nginx</h4>
+                <p>Activo</p>
+            </div>
+            <div class="status-item">
+                <h4>👤 Usuario DevOps</h4>
+                <p>Configurado</p>
+            </div>
+            <div class="status-item">
+                <h4>🔐 Firewall</h4>
+                <p>Configurado</p>
+            </div>
+        </div>
+        
+        <div class="info">
+            <h3>Puertos Habilitados</h3>
+            <ul>
+                <li>Puerto 22 - SSH</li>
+                <li>Puerto 80 - HTTP</li>
+                <li>Puerto 443 - HTTPS</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
